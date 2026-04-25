@@ -1,0 +1,18 @@
+# Python dependencies for SER_Wav2Vec2_OS_Optimized_Windows_GPU.ipynb
+# Install PyTorch separately from the official selector:
+# https://pytorch.org/get-started/locally/
+kagglehub
+transformers
+accelerate
+scikit-learn
+imbalanced-learn
+pandas
+numpy
+matplotlib
+tqdm
+soundfile
+librosa
+filelock
+psutil
+joblib
+ipywidgets
