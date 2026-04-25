@@ -1,4 +1,4 @@
-# README_walkthrough.txt
+# README.md
 
 Project: OS-Optimized Speech Emotion Recognition using Wav2Vec2 and RAVDESS
 
