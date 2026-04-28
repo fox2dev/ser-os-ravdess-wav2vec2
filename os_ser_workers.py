@@ -99,13 +99,8 @@ def load_audio_mono_16k(path: str | Path, target_sr: int = 16000) -> np.ndarray:
 
     return audio.astype(np.float32)
 
-def preprocess_one(
-    path: str | Path,
-    cache_dir: str | Path,
-    target_sr: int = 16000,
-    force_reprocess: bool = False,
-) -> Dict[str, Any]:
-    """Preprocess one file with synchronization and optional cache bypass."""
+def preprocess_one(path: str | Path, cache_dir: str | Path, target_sr: int = 16000) -> Dict[str, Any]:
+    """Preprocess one file with synchronization and atomic cache writes."""
     t0 = time.perf_counter()
     p = Path(path)
     cache_dir = Path(cache_dir)
@@ -117,9 +112,7 @@ def preprocess_one(
     file_stat = os.stat(str(p))
 
     with FileLock(lock_path):
-        cached = None
-        if not force_reprocess and cache_path.exists():
-            cached = _safe_load_cache(cache_path)
+        cached = _safe_load_cache(cache_path) if cache_path.exists() else None
         if cached is not None:
             duration_sec = len(cached) / float(target_sr)
             meta.update({
